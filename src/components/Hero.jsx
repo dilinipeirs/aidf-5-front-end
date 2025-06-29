@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Plus, Sparkles } from "lucide-react";
