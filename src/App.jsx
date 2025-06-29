@@ -1,25 +1,19 @@
-import HotelCard from "./HotelCard";
-import User from "./Manupa";
-import { Button } from "./components/ui/button";
-import { hotels } from "./data";
+import Hero from "./components/Hero";
+import Navigation from "./components/Navigation";
+
+import HotelListings from "./components/HotelListings";
 
 function App() {
   return (
-    <div className="py-5 border-2 border-black">
-      {hotels.map((hotel, i) => {
-        return (
-          <HotelCard
-            key={hotel._id}
-            name={hotel.name}
-            location={hotel.location}
-            rating={hotel.rating}
-            reviews={hotel.reviews}
-            price={hotel.price}
-          />
-        );
-      })}
-      <Button onClick={() => console.log("Clicked")}>Click Me</Button>
-    </div>
+    <>
+      <Navigation />
+      <main>
+        <div className="relative min-h-[85vh]">
+          <Hero />
+        </div>
+        <HotelListings />
+      </main>
+    </>
   );
 }
 
