@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 // import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
 import { Menu, Globe, X } from "lucide-react";
-// import { Link } from "react-router";
+import { Link } from "react-router";
 import { useState, useRef, useEffect } from "react";
 
 function Navigation() {
@@ -47,13 +47,13 @@ function Navigation() {
   return (
     <nav className="z-50 bg-black/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-white py-3 rounded-full mx-4 my-3 relative">
       <div className="flex items-center space-x-8">
-        <a href="/" className="text-xl font-bold">
+        <Link to="/" className="text-xl font-bold">
           Horizone
-        </a>
+        </Link>
         <div className="hidden md:flex space-x-6">
-          <a href={`/`} className="transition-colors text-sm">
+          <Link to={`/`} className="transition-colors text-sm">
             Home
-          </a>
+          </Link>
 
           {/* {user?.publicMetadata?.role === "admin" && (
             <a href={`/hotels/create`} className="transition-colors text-sm">
@@ -91,14 +91,14 @@ function Navigation() {
           asChild
           className="text-xs hidden md:flex"
         >
-          <a href="/sign-in">Log In</a>
+          <Link to="/sign-in">Log In</Link>
         </Button>
         <Button
           size="sm"
           asChild
           className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex"
         >
-          <a href="/sign-up">Sign Up</a>
+          <Link to="/sign-up">Sign Up</Link>
         </Button>
         {/* <SignedIn>
           <UserButton />
