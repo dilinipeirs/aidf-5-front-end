@@ -1,35 +1,31 @@
 const getAllHotels = async () => {
-  // TODO: Make a GET request to the API\
   const res = await fetch("http://localhost:8000/api/hotels", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  if (!res.ok) {
+    throw new Error("Failed to fetch hotels");
+  }
   const data = await res.json();
-  console.log(data);
 
-
-  //   console.log("A");
-  //   fetch("http://localhost:8000/api/hotels", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   console.log("B");
-  // TODO: Return the data
   return data;
 };
 
-export { getAllHotels };
+const getAllLocations = async () => {
+  const res = await fetch("http://localhost:8000/api/locations", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch locations");
+  }
+  const data = await res.json();
+
+  return data;
+};
+
+export { getAllHotels, getAllLocations };
