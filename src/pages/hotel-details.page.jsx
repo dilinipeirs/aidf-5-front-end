@@ -23,9 +23,7 @@ const HotelDetailsPage = () => {
   useEffect(() => {
     getHotelById(_id)
       .then((data) => {
-        setHotel(data);
-        console.log(data);
-        
+        setHotel(data);        
       })
       .catch((error) => {
         setIsHotelError(true);
