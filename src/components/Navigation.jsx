@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 // import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
-import { Menu, Globe, X } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import { useState, useRef, useEffect } from "react";
 
 function Navigation() {
   //   const { user } = useUser();
@@ -44,6 +45,8 @@ function Navigation() {
   //     };
   //   }, [isMenuOpen]);
 
+  // const count = useSelector((state) => state.counter);
+
   return (
     <nav className="z-50 bg-black/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-white py-3 rounded-full mx-4 my-3 relative">
       <div className="flex items-center space-x-8">
@@ -54,6 +57,7 @@ function Navigation() {
           <Link to={`/`} className="transition-colors text-sm">
             Home
           </Link>
+          {/* <p>{count}</p> */}
 
           {/* {user?.publicMetadata?.role === "admin" && (
             <a href={`/hotels/create`} className="transition-colors text-sm">
