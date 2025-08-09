@@ -30,7 +30,7 @@ export default function Hero() {
       setCurrentSlide(index);
     },
     [currentSlide, isTransitioning]
-  );
+  ); 
 
   useEffect(() => {
     let transitionTimeout;

@@ -13,6 +13,20 @@ const getAllHotels = async () => {
   return data;
 };
 
+const getHotelById = async (id) => {
+  const res = await fetch(`http://localhost:8000/api/hotels/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch hotel");
+  }
+  const data = await res.json();
+  return data;
+};
+
 const getAllLocations = async () => {
   const res = await fetch("http://localhost:8000/api/locations", {
     method: "GET",
@@ -28,4 +42,4 @@ const getAllLocations = async () => {
   return data;
 };
 
-export { getAllHotels, getAllLocations };
+export { getAllHotels, getAllLocations, getHotelById };
