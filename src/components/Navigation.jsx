@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-// import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { Globe, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -72,7 +72,7 @@ function Navigation() {
           <Globe className="h-4 w-4 mr-2" />
           EN
         </Button>
-        {/* <SignedOut>
+        <SignedOut>
           <Button
             variant="ghost"
             size="sm"
@@ -88,8 +88,8 @@ function Navigation() {
           >
             <Link to="/sign-up">Sign Up</Link>
           </Button>
-        </SignedOut> */}
-        <Button
+        </SignedOut>
+        {/* <Button
           variant="ghost"
           size="sm"
           asChild
@@ -103,8 +103,8 @@ function Navigation() {
           className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex"
         >
           <Link to="/sign-up">Sign Up</Link>
-        </Button>
-        {/* <SignedIn>
+        </Button> */}
+        <SignedIn>
           <UserButton />
           <Button
             size="sm"
@@ -113,7 +113,7 @@ function Navigation() {
           >
             <Link to="/account">My Account</Link>
           </Button>
-        </SignedIn> */}
+        </SignedIn>
 
         {/* Mobile Menu Button */}
         <div className="relative md:hidden">

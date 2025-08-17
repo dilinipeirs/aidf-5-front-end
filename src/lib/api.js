@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // const getAllHotels = async () => {
 //   try {
@@ -38,30 +38,54 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // export { getAllHotels, getAllLocations };
 
-
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/' }),
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8000/api/",
+    prepareHeaders: async (headers) => {
+      return new Promise((resolve) => {
+        async function checkToken() {
+          const clerk = window.Clerk;
+          if (clerk) {
+            const token = await clerk.session?.getToken();
+            headers.set("Authorization", `Bearer ${token}`);
+            resolve(headers);
+          } else {
+            setTimeout(checkToken, 500);
+          }
+        }
+        checkToken();
+      });
+    },
+  }),
   endpoints: (build) => ({
     getAllHotels: build.query({
-      query: () => 'hotels',
+      query: () => "hotels",
+    }),
+    getHotelById: build.query({
+      query: (id) => `hotels/${id}`,
     }),
     addLocation: build.mutation({
       query: (location) => ({
-        url: 'locations',
-        method: 'POST',
+        url: "locations",
+        method: "POST",
         body: {
           name: location.name,
         },
       }),
     }),
     getAllLocations: build.query({
-      query: () => 'locations',
+      query: () => "locations",
     }),
   }),
-})
+});
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useAddLocationMutation, useGetAllLocationsQuery } = api
+export const {
+  useGetAllHotelsQuery,
+  useGetHotelByIdQuery,
+  useAddLocationMutation,
+  useGetAllLocationsQuery,
+} = api;
