@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import AISearch from "./AISearch";
 import { Input } from "@/components/ui/input";
 import { Plus, Sparkles } from "lucide-react";
 // import { useDispatch } from "react-redux";
@@ -66,11 +67,6 @@ export default function Hero() {
   //     [dispatch]
   //   );
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log("Hey");
-  };
-
   return (
     <div className="relative h-[500px] md:h-[600px] py-3 mx-4 overflow-hidden rounded-3xl bg-black z-0">
       {/* Background Images */}
@@ -88,7 +84,7 @@ export default function Hero() {
       ))}
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center text-white justify-center h-full px-4 sm:px-8 z-0">
+      <div className="relative z-10 flex flex-col items-center text-white justify-center h-full px-4 sm:px-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
           Find Your Best Staycation
         </h1>
@@ -98,7 +94,7 @@ export default function Hero() {
         </p>
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="w-full max-w-md">
+        {/* <form onSubmit={handleSearch} className="w-full max-w-md">
           <div className="relative flex items-center">
             <div className="relative flex-grow">
               <Input
@@ -117,7 +113,8 @@ export default function Hero() {
               <span className="text-sm">AI Search</span>
             </button>
           </div>
-        </form>
+        </form> */}
+        <AISearch />
 
         {/* Pagination dots */}
         <div className="absolute bottom-6 flex space-x-3">
