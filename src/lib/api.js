@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// export { getAllHotels, getAllLocations };
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/",
+    baseUrl: `${BACKEND_URL}/api/`,
     prepareHeaders: async (headers) => {
       return new Promise((resolve) => {
         async function checkToken() {
@@ -44,6 +44,26 @@ export const api = createApi({
       }),
       invalidatesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
     }),
+    createBooking: build.mutation({
+      query: (booking) => ({
+        url: "bookings",
+        method: "POST",
+        body: booking,
+      }),
+    }),
+    getBookingById: build.query({
+      query: (bookingId) => `bookings/${bookingId}`,
+    }),
+    createCheckoutSession: build.mutation({
+      query: (payload) => ({
+        url: `payments/create-checkout-session`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    getCheckoutSessionStatus: build.query({
+      query: (sessionId) => `payments/session-status?session_id=${sessionId}`,
+    }),
     getAllLocations: build.query({
       query: () => "locations",
       providesTags: (result, error, id) => [{ type: "Locations", id: "LIST" }],
@@ -80,6 +100,10 @@ export const {
   useGetHotelByIdQuery,
   useGetHotelsBySearchQuery,
   useCreateHotelMutation,
+  useCreateBookingMutation,
+  useGetBookingByIdQuery,
+  useCreateCheckoutSessionMutation,
+  useGetCheckoutSessionStatusQuery,
   useAddLocationMutation,
   useGetAllLocationsQuery,
   useAddReviewMutation,
