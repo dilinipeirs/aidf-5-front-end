@@ -30,7 +30,7 @@ export const api = createApi({
     }),
     getHotelsBySearch: build.query({
       query: (search) => `hotels/search?query=${search}`,
-      providesTags: (result, error, id) => [{ type: "Hotels", search }],
+      providesTags: (result, error, search) => [{ type: "Hotels", id: search }],
     }),
     getHotelById: build.query({
       query: (id) => `hotels/${id}`,
@@ -86,7 +86,7 @@ export const api = createApi({
         method: "POST",
         body: review,
       }),
-      invalidatesTags: (result, error, id) => [
+      invalidatesTags: (result, error, review) => [
         { type: "Hotels", id: review.hotelId },
       ],
     }),
