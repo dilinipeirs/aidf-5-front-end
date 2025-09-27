@@ -26,11 +26,14 @@ export const api = createApi({
   endpoints: (build) => ({
     getAllHotels: build.query({
       query: () => "hotels",
+      // This function tells RTK Query that the result of this query provides the "Hotels" list tag.
+      // This is used for cache management: when a mutation invalidates this tag,
+      // RTK Query will refetch this query to keep the data up to date.
       providesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
     }),
     getHotelsBySearch: build.query({
       query: (search) => `hotels/search?query=${search}`,
-      providesTags: (result, error, id) => [{ type: "Hotels", search }],
+      providesTags: (result, error, id) => [ "Hotels", "Search" ],
     }),
     getHotelById: build.query({
       query: (id) => `hotels/${id}`,
@@ -42,6 +45,8 @@ export const api = createApi({
         method: "POST",
         body: hotel,
       }),
+      // This function tells RTK Query to invalidate (mark as stale) the cached "Hotels" list
+      // after a hotel is created, so that the list will be refetched with the new data.
       invalidatesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
     }),
     getAllLocations: build.query({
