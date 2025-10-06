@@ -54,6 +54,9 @@ export const api = createApi({
     getBookingById: build.query({
       query: (bookingId) => `bookings/${bookingId}`,
     }),
+    getAllBookingsForUser: build.query({
+      query: (userId) => `bookings/user/${userId}`,
+    }),
     createCheckoutSession: build.mutation({
       query: (payload) => ({
         url: `payments/create-checkout-session`,
@@ -102,6 +105,7 @@ export const {
   useCreateHotelMutation,
   useCreateBookingMutation,
   useGetBookingByIdQuery,
+  useGetAllBookingsForUserQuery,
   useCreateCheckoutSessionMutation,
   useGetCheckoutSessionStatusQuery,
   useAddLocationMutation,
