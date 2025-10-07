@@ -5,9 +5,25 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react"
+import { useNavigate } from "react-router";
+import { useCreateBookingMutation } from "@/lib/api";
+import { BookingDialog } from "@/components/BookingDialog";
 
 export function HotelCardComplex({ hotel, viewMode }) {
+  const navigate = useNavigate();
+  const [createBooking, { isLoading: isCreateBookingLoading }] = useCreateBookingMutation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const handleBook = async (bookingData) => {
+    try {
+      const result = await createBooking({
+        hotelId: _id,
+        checkIn: bookingData.checkIn,
+        checkOut: bookingData.checkOut,
+      }).unwrap();
+      navigate(`/booking/payment?bookingId=${result._id}`);
+    } catch (error) {}
+  };
 
   const nextImage = (e) => {
     e.stopPropagation()
@@ -26,8 +42,7 @@ export function HotelCardComplex({ hotel, viewMode }) {
           {/* Image Section */}
           <div className="relative w-full sm:w-80 h-64 sm:h-auto flex-shrink-0 group">
             <img
-              // src={hotel.images[currentImageIndex] || "/placeholder.svg"}
-              src={hotel.image || "/placeholder.svg"}
+              src={hotel.images?.[currentImageIndex] || hotel.image || "/placeholder.svg"}
               alt={hotel.name}
               className="w-full h-full object-cover"
             />
@@ -94,8 +109,17 @@ export function HotelCardComplex({ hotel, viewMode }) {
                   <p className="text-sm text-muted-foreground">per night</p>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline">View Details</Button>
-                  <Button>Book Now</Button>
+                  <Button variant="outline"
+                  onClick={() => {
+                    const hotelId = hotel._id || hotel.id;
+                    navigate(`/hotels/${hotelId}`);
+                  }}> View Details</Button>
+                  <BookingDialog
+                    hotelName={hotel.name}
+                    hotelId={hotel._id}
+                    onSubmit={handleBook}
+                    isLoading={isCreateBookingLoading}
+                  />
                 </div>
               </div>
             </div>
@@ -110,8 +134,7 @@ export function HotelCardComplex({ hotel, viewMode }) {
       {/* Image Section */}
       <div className="relative h-56 group">
         <img
-          // src={hotel.images[currentImageIndex] || "/placeholder.svg"}
-          src={hotel.image || "/placeholder.svg"}
+          src={hotel.images?.[currentImageIndex] || hotel.image || "/placeholder.svg"}
           alt={hotel.name}
           className="w-full h-full object-cover"
         />
@@ -179,12 +202,23 @@ export function HotelCardComplex({ hotel, viewMode }) {
             <p className="text-xs text-muted-foreground">per night</p>
           </div>
           <div className="flex flex-col gap-2">
-            <Button size="sm" variant="outline" className="w-full bg-transparent">
-              Details
+            <Button size="sm" variant="outline" className="w-full bg-transparent"
+            onClick={() => {
+              const hotelId = hotel._id || hotel.id;
+              navigate(`/hotels/${hotelId}`);
+            }}
+            >
+              View Details
             </Button>
-            <Button size="sm" className="w-full">
+            <BookingDialog
+                    hotelName={hotel.name}
+                    hotelId={hotel._id}
+                    onSubmit={handleBook}
+                    isLoading={isCreateBookingLoading}
+            />
+            {/* <Button size="sm" className="w-full">
               Book Now
-            </Button>
+            </Button> */}
           </div>
         </div>
       </CardContent>

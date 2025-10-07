@@ -25,7 +25,7 @@ export default function BookingCard({ booking }) {
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/3">
           <img
-            src={booking.hotel.image || "/placeholder.svg"}
+            src={booking.hotel.images?.[0] || booking.hotel.image || "/placeholder.svg"}
             alt={booking.hotel.name}
             className="w-full h-48 md:h-full object-cover"
           />

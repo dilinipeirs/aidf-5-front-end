@@ -25,8 +25,8 @@ const formSchema = z.object({
   description: z.string().min(1, {
     message: "Description is required",
   }),
-  image: z.string().min(1, {
-    message: "Image is required",
+  images: z.array(z.string()).min(1, {
+    message: "At least one image is required",
   }),
   location: z.string().min(1, {
     message: "Location is required",
@@ -43,7 +43,7 @@ export default function HotelCreateFrom() {
     defaultValues: {
       name: "",
       description: "",
-      image: "",
+      images: [""],
       location: "",
       price: 0,
     },
@@ -100,14 +100,48 @@ export default function HotelCreateFrom() {
         />
         <FormField
           control={form.control}
-          name="image"
+          name="images"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Image</FormLabel>
+              <FormLabel>Images</FormLabel>
               <FormControl>
-                <Input placeholder="Image URL" {...field} />
+                <div className="space-y-2">
+                  {field.value.map((image, index) => (
+                    <Input
+                      key={index}
+                      placeholder={`Image URL ${index + 1}`}
+                      value={image}
+                      onChange={(e) => {
+                        const newImages = [...field.value];
+                        newImages[index] = e.target.value;
+                        field.onChange(newImages);
+                      }}
+                    />
+                  ))}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      field.onChange([...field.value, ""]);
+                    }}
+                  >
+                    Add Image
+                  </Button>
+                  {field.value.length > 1 && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        const newImages = field.value.slice(0, -1);
+                        field.onChange(newImages);
+                      }}
+                    >
+                      Remove Last Image
+                    </Button>
+                  )}
+                </div>
               </FormControl>
-              <FormDescription>URL to an image of the hotel.</FormDescription>
+              <FormDescription>URLs to images of the hotel.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

@@ -15,7 +15,7 @@ function CreateHotelPage() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
       error: null,
     },
-    image: { value: "kajsdhajk", error: null },
+    images: { value: ["kajsdhajk"], error: null },
     location: { value: "Paris", error: null },
     price: { value: "100", error: null },
   });
@@ -27,8 +27,8 @@ function CreateHotelPage() {
     description: z.object({
       value: z.string().min(1, { message: "Description is required" }),
     }),
-    image: z.object({
-      value: z.string().min(1, { message: "Image is required" }),
+    images: z.object({
+      value: z.array(z.string()).min(1, { message: "At least one image is required" }),
     }),
     location: z.object({
       value: z.string().min(1, { message: "Location is required" }),
@@ -56,7 +56,7 @@ function CreateHotelPage() {
       ...formData,
       name: { ...formData.name, error: null },
       description: { ...formData.description, error: null },
-      image: { ...formData.image, error: null },
+      images: { ...formData.images, error: null },
       location: { ...formData.location, error: null },
       price: { ...formData.price, error: null },
     });
@@ -103,15 +103,52 @@ function CreateHotelPage() {
           <span className="text-red-500">{formData.description.error}</span>
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="image">Image</Label>
-          <Input
-            id="image"
-            value={formData.image.value}
-            onChange={handleValueChange}
-            name="image"
-            className="block"
-          />
-          <span className="text-red-500">{formData.image.error}</span>
+          <Label htmlFor="images">Images</Label>
+          {formData.images.value.map((image, index) => (
+            <Input
+              key={index}
+              id={`image-${index}`}
+              value={image}
+              onChange={(e) => {
+                const newImages = [...formData.images.value];
+                newImages[index] = e.target.value;
+                setFormData({
+                  ...formData,
+                  images: { ...formData.images, value: newImages }
+                });
+              }}
+              placeholder={`Image URL ${index + 1}`}
+              className="block"
+            />
+          ))}
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setFormData({
+                ...formData,
+                images: { ...formData.images, value: [...formData.images.value, ""] }
+              });
+            }}
+          >
+            Add Image
+          </Button>
+          {formData.images.value.length > 1 && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                const newImages = formData.images.value.slice(0, -1);
+                setFormData({
+                  ...formData,
+                  images: { ...formData.images, value: newImages }
+                });
+              }}
+            >
+              Remove Last Image
+            </Button>
+          )}
+          <span className="text-red-500">{formData.images.error}</span>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="location">Location</Label>
