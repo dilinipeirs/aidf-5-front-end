@@ -182,11 +182,11 @@ export default function HotelsPage(
   const indexOfLastHotel = currentPage * hotelsPerPage
   const indexOfFirstHotel = indexOfLastHotel - hotelsPerPage
 
-  console.log(indexOfLastHotel);
-  console.log(indexOfFirstHotel);
+  // console.log(indexOfLastHotel);
+  // console.log(indexOfFirstHotel);
 
   const currentHotels = filteredHotels.slice(indexOfFirstHotel, indexOfLastHotel)
-  console.log(currentHotels);
+  // console.log(currentHotels);
   const totalPages = Math.ceil(filteredHotels.length / hotelsPerPage)
 
   return (

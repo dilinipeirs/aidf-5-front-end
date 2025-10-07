@@ -28,7 +28,7 @@ const amenities = [
 
 export function FilterSidebar({ locationObjects, filters, setFilters }) {
 
-  console.log(locationObjects);
+  // console.log(locationObjects);
 
   // iterate through locationObjects and prepare a locations array
   const locations = locationObjects?.map(locationObj => locationObj.name);
