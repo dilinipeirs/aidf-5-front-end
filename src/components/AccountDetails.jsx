@@ -2,11 +2,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useUser } from "@clerk/clerk-react";
 import { User, Mail, Phone, MapPin, CreditCard, Bell, Globe, Shield } from "lucide-react"
 
 export default function AccountDetails() {
+
+  const { user } = useUser();
+
   return (
     <div className="space-y-6">
       <div>
@@ -26,11 +28,11 @@ export default function AccountDetails() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
-              <Input id="firstName" defaultValue="John" />
+              <Input id="firstName" defaultValue={user?.firstName || ""} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastName">Last Name</Label>
-              <Input id="lastName" defaultValue="Doe" />
+              <Input id="lastName" defaultValue={user?.lastName || ""} />
             </div>
           </div>
           <div className="space-y-2">
@@ -38,7 +40,15 @@ export default function AccountDetails() {
               <Mail className="w-4 h-4" />
               Email Address
             </Label>
-            <Input id="email" type="email" defaultValue="john.doe@example.com" />
+            <Input
+              id="email"
+              type="email"
+              defaultValue={user?.primaryEmailAddress?.emailAddress || user?.emailAddresses?.[0]?.emailAddress || ""}
+              disabled
+              className="bg-gray-100 cursor-not-allowed"
+              tabIndex={-1}
+              aria-disabled="true"
+            />
           </div>
           {/* <div className="space-y-2">
             <Label htmlFor="phone" className="flex items-center gap-2">
@@ -54,7 +64,12 @@ export default function AccountDetails() {
             </Label>
             <Input id="address" defaultValue="123 Main Street, New York, NY 10001" />
           </div> */}
-          <Button>Save Changes</Button>
+          <Button
+           onClick={() =>
+            window.alert(
+              "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
+            )
+          }>Save Changes</Button>
         </CardContent>
       </Card>
 
@@ -77,7 +92,13 @@ export default function AccountDetails() {
                 <p className="text-sm text-gray-600">Expires 12/25</p>
               </div>
             </div>
-            <Button variant="outline" size="sm">
+            <Button 
+            onClick={() =>
+              window.alert(
+                "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
+              )
+            }
+            variant="outline" size="sm">
               Remove
             </Button>
           </div>
@@ -91,11 +112,23 @@ export default function AccountDetails() {
                 <p className="text-sm text-gray-600">Expires 06/26</p>
               </div>
             </div>
-            <Button variant="outline" size="sm">
+            <Button 
+            onClick={() =>
+              window.alert(
+                "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
+              )
+            }
+            variant="outline" size="sm">
               Remove
             </Button>
           </div>
-          <Button variant="outline">Add Payment Method</Button>
+          <Button 
+          onClick={() =>
+            window.alert(
+              "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
+            )
+          }
+          variant="outline">Add Payment Method</Button>
         </CardContent>
       </Card>
 
@@ -186,7 +219,13 @@ export default function AccountDetails() {
           </div>
           <Button>Update Password</Button> */}
           <div className="pt-4 border-t">
-            <Button variant="destructive" className="w-full">
+            <Button 
+            onClick={() =>
+              window.alert(
+                "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
+              )
+            }
+            variant="destructive" className="w-full">
               Delete Account
             </Button>
           </div>
