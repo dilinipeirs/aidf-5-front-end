@@ -76,7 +76,7 @@ export function HotelCardComplex({ hotel, viewMode }) {
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="font-medium">{hotel.rating}</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">({hotel.reviews} reviews)</span>
+                  <span className="text-sm text-muted-foreground">({hotel.reviews?.length ?? "No"} reviews)</span>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {hotel.amenities?.slice(0, 5).map((amenity) => (
@@ -158,7 +158,7 @@ export function HotelCardComplex({ hotel, viewMode }) {
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span className="font-medium">{hotel.rating}</span>
           </div>
-          <span className="text-sm text-muted-foreground">({hotel.reviews} reviews)</span>
+          <span className="text-sm text-muted-foreground">({hotel.reviews?.length ?? "No"} reviews)</span>
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
           {hotel.amenities?.slice(0, 3).map((amenity) => (

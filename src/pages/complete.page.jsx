@@ -97,7 +97,7 @@ function CompletePage() {
                 <span>{data.hotel.rating}</span>
                 {data.hotel.reviews && (
                   <span className="text-gray-500 text-sm ml-1">
-                    ({data.hotel.reviews} reviews)
+                    ({data.hotel.reviews?.length ?? "No"} Reviews)
                   </span>
                 )}
               </div>

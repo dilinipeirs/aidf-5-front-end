@@ -131,7 +131,7 @@ const HotelDetailsPage = () => {
             <span className="font-bold">{hotel?.rating ?? "No rating"}</span>
             <span className="text-muted-foreground">
               ({hotel?.reviews.length === 0 ? "No" : hotel?.reviews.length}{" "}
-              reviews)
+              Reviews)
             </span>
           </div>
           <p className="text-muted-foreground">{hotel.description}</p>

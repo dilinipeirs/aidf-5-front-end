@@ -43,7 +43,7 @@ export default function BookingCard({ booking }) {
               <div className="flex items-center">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
                 <span className="font-medium">{booking.hotel.rating}</span>
-                <span className="text-gray-600 text-sm ml-1">({booking.hotel.reviews?.length === 0 ? 0: booking.hotel.reviews.length} Reviews)</span>
+                <span className="text-gray-600 text-sm ml-1">({booking.hotel.reviews?.length ?? "No"} Reviews)</span>
               </div>
             </div>
             <Badge className={getStatusColor(booking.paymentStatus)}>
