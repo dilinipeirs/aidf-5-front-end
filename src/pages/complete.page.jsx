@@ -80,9 +80,9 @@ function CompletePage() {
         </p>
         <div className="mt-6 border rounded-lg overflow-hidden">
           <div className="relative h-48">
-            {data.hotel.image && (
+            {(data.hotel.images?.[0] || data.hotel.image) && (
               <img
-                src={data.hotel.image}
+                src={data.hotel.images?.[0] || data.hotel.image}
                 alt={data.hotel.name}
                 className="w-full h-full object-cover"
               />
@@ -97,7 +97,7 @@ function CompletePage() {
                 <span>{data.hotel.rating}</span>
                 {data.hotel.reviews && (
                   <span className="text-gray-500 text-sm ml-1">
-                    ({data.hotel.reviews} reviews)
+                    ({data.hotel.reviews?.length ?? "No"} Reviews)
                   </span>
                 )}
               </div>

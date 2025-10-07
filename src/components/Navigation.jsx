@@ -54,8 +54,8 @@ function Navigation() {
           Horizone
         </Link>
         <div className="hidden md:flex space-x-6">
-          <Link to={`/`} className="transition-colors text-sm">
-            Home
+          <Link to={`/hotels`} className="transition-colors text-sm">
+            Advanced Search
           </Link>
           {/* <p>{count}</p> */}
 

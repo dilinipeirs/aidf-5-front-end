@@ -25,7 +25,7 @@ export default function BookingCard({ booking }) {
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/3">
           <img
-            src={booking.hotel.image || "/placeholder.svg"}
+            src={booking.hotel.images?.[0] || booking.hotel.image || "/placeholder.svg"}
             alt={booking.hotel.name}
             className="w-full h-48 md:h-full object-cover"
           />
@@ -43,7 +43,7 @@ export default function BookingCard({ booking }) {
               <div className="flex items-center">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
                 <span className="font-medium">{booking.hotel.rating}</span>
-                <span className="text-gray-600 text-sm ml-1">({booking.hotel.reviews?.length === 0 ? 0: booking.hotel.reviews.length} Reviews)</span>
+                <span className="text-gray-600 text-sm ml-1">({booking.hotel.reviews?.length ?? "No"} Reviews)</span>
               </div>
             </div>
             <Badge className={getStatusColor(booking.paymentStatus)}>

@@ -23,7 +23,7 @@ function HotelCard(props) {
     <Link to={`/hotels/${props.hotel._id}`} className="block group relative">
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
         <img
-          src={props.hotel.image}
+          src={props.hotel.images?.[0] || props.hotel.image || "/placeholder.svg"}
           alt={props.hotel.name}
           className="object-cover w-full h-full absolute transition-transform group-hover:scale-105"
         />

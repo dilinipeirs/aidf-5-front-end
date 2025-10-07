@@ -4,10 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAddReviewMutation, useCreateBookingMutation, useGetHotelByIdQuery } from "@/lib/api";
 import { useUser } from "@clerk/clerk-react";
-import { Building2, Coffee, MapPin, PlusCircle, Star, Tv, Wifi } from "lucide-react";
+import { Building2, Coffee, MapPin, PlusCircle, Star, Tv, Wifi, ChevronLeft, ChevronRight } from "lucide-react";
 import { useParams } from "react-router";
 import { BookingDialog } from "@/components/BookingDialog";
 import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
 
 const HotelDetailsPage = () => {
   const { _id } = useParams();
@@ -15,8 +16,28 @@ const HotelDetailsPage = () => {
   const [addReview, { isLoading: isAddReviewLoading }] = useAddReviewMutation();
   const [createBooking, { isLoading: isCreateBookingLoading }] = useCreateBookingMutation();
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { user } = useUser();
+
+  // Reset image index when hotel data changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [hotel?._id]);
+
+  const nextImage = () => {
+    const images = hotel?.images || [];
+    if (images.length > 0) {
+      setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }
+  };
+
+  const prevImage = () => {
+    const images = hotel?.images || [];
+    if (images.length > 0) {
+      setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    }
+  };
 
   const handleAddReview = async () => {
     try {
@@ -99,12 +120,43 @@ const HotelDetailsPage = () => {
     <main className="px-4">
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="relative w-full h-[400px]">
+          <div className="relative w-full h-[400px] group">
             <img
-              src={hotel.image}
+              src={hotel.images?.[currentImageIndex] || hotel.image || "/placeholder.svg"}
               alt={hotel.name}
-              className="absolute object-cover rounded-lg"
+              className="absolute object-cover rounded-lg w-full h-full"
             />
+            {hotel.images && hotel.images.length > 1 && (
+              <>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity h-10 w-10"
+                  onClick={prevImage}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity h-10 w-10"
+                  onClick={nextImage}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {hotel.images.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`h-2 w-2 rounded-full transition-colors ${
+                        index === currentImageIndex ? "bg-white" : "bg-white/50"
+                      }`}
+                      onClick={() => setCurrentImageIndex(index)}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
           <div className="flex space-x-2">
             <Badge variant="secondary">Rooftop View</Badge>
@@ -131,7 +183,7 @@ const HotelDetailsPage = () => {
             <span className="font-bold">{hotel?.rating ?? "No rating"}</span>
             <span className="text-muted-foreground">
               ({hotel?.reviews.length === 0 ? "No" : hotel?.reviews.length}{" "}
-              reviews)
+              Reviews)
             </span>
           </div>
           <p className="text-muted-foreground">{hotel.description}</p>

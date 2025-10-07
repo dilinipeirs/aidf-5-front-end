@@ -150,6 +150,7 @@ export default function BookingHistory() {
         )}
         {isBookingsError && <div className="text-red-600">{bookingsError?.data?.message || "Failed to load bookings"}</div>}
         {!isBookingsLoading && !isBookingsError && bookings.length === 0 && (
+          // user hasn't done any bookings yet
           <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
             <img
               src="https://www.nicepng.com/png/detail/366-3662305_free-png-white-paper-planplane-png-images-transparent.png"
@@ -163,7 +164,8 @@ export default function BookingHistory() {
         )}
         {!isBookingsLoading && !isBookingsError && filteredBookings.length > 0 ? (
           filteredBookings.map((booking) => <BookingCard key={booking.id} booking={booking} />)
-        ) : (
+        ) : bookings.length > 0 && filteredBookings.length === 0 (
+          // user has done bookings but no bookings found according to filters
           <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed">
             <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-3" />
             <h3 className="text-lg font-semibold text-gray-900 mb-1">No bookings found</h3>
