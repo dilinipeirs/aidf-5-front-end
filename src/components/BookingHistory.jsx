@@ -40,7 +40,7 @@ export default function BookingHistory() {
         {!isBookingsLoading && !isBookingsError && bookings.length === 0 && (
           <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
             <img
-              src="https://cdn.vectorstock.com/i/preview-1x/72/11/airplane-travel-concept-with-map-pins-gps-points-vector-22997211.jpg"
+              src="https://www.nicepng.com/png/detail/366-3662305_free-png-white-paper-planplane-png-images-transparent.png"
               alt="No bookings"
               className="w-80 h-40 object-contain opacity-70 grayscale"
             />
