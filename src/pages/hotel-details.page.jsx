@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAddReviewMutation, useCreateBookingMutation, useGetHotelByIdQuery } from "@/lib/api";
 import { useUser } from "@clerk/clerk-react";
-import { Building2, Coffee, MapPin, PlusCircle, Star, Tv, Wifi, ChevronLeft, ChevronRight } from "lucide-react";
+import { Building2, Coffee, MapPin, PlusCircle, Star, Tv, Wifi, ChevronLeft, ChevronRight, Car, Dumbbell, Utensils, Waves, Shield, ParkingCircle, AirVent, Bed, Phone, Heart, Plane } from "lucide-react";
 import { useParams } from "react-router";
 import { BookingDialog } from "@/components/BookingDialog";
 import { useNavigate } from "react-router";
@@ -24,6 +24,64 @@ const HotelDetailsPage = () => {
   useEffect(() => {
     setCurrentImageIndex(0);
   }, [hotel?._id]);
+
+  // Amenity icon mapping for specific hotel amenities
+  const getAmenityIcon = (amenity) => {
+    const amenityLower = amenity.toLowerCase();
+    
+    // WiFi
+    if (amenityLower === 'wifi' || amenityLower === 'wi-fi') {
+      return <Wifi className="h-5 w-5 mr-2" />;
+    }
+    
+    // Pool
+    if (amenityLower === 'pool') {
+      return <Waves className="h-5 w-5 mr-2" />;
+    }
+    
+    // Gym
+    if (amenityLower === 'gym') {
+      return <Dumbbell className="h-5 w-5 mr-2" />;
+    }
+    
+    // Spa
+    if (amenityLower === 'spa') {
+      return <Waves className="h-5 w-5 mr-2" />;
+    }
+    
+    // Restaurant
+    if (amenityLower === 'restaurant') {
+      return <Utensils className="h-5 w-5 mr-2" />;
+    }
+    
+    // Bar
+    if (amenityLower === 'bar') {
+      return <Coffee className="h-5 w-5 mr-2" />;
+    }
+    
+    // Parking
+    if (amenityLower === 'parking') {
+      return <ParkingCircle className="h-5 w-5 mr-2" />;
+    }
+    
+    // Pet Friendly
+    if (amenityLower === 'pet friendly' || amenityLower === 'pet-friendly') {
+      return <Heart className="h-5 w-5 mr-2" />;
+    }
+    
+    // Airport Shuttle
+    if (amenityLower === 'airport shuttle' || amenityLower === 'airport-shuttle') {
+      return <Plane className="h-5 w-5 mr-2" />;
+    }
+    
+    // Room Service
+    if (amenityLower === 'room service' || amenityLower === 'room-service') {
+      return <Phone className="h-5 w-5 mr-2" />;
+    }
+    
+    // Default icon for unknown amenities
+    return <Building2 className="h-5 w-5 mr-2" />;
+  };
 
   const nextImage = () => {
     const images = hotel?.images || [];
@@ -190,24 +248,21 @@ const HotelDetailsPage = () => {
           <Card>
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-4">Amenities</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center">
-                  <Wifi className="h-5 w-5 mr-2" />
-                  <span>Free Wi-Fi</span>
+              {hotel?.amenities && hotel.amenities.length > 0 ? (
+                <div className="grid grid-cols-2 gap-4">
+                  {hotel.amenities.map((amenity, index) => (
+                    <div key={index} className="flex items-center">
+                      {getAmenityIcon(amenity)}
+                      <span>{amenity}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center">
-                  <Building2 className="h-5 w-5 mr-2" />
-                  <span>Restaurant</span>
+              ) : (
+                <div className="text-muted-foreground text-center py-4">
+                  <Building2 className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                  <p>No amenities listed</p>
                 </div>
-                <div className="flex items-center">
-                  <Tv className="h-5 w-5 mr-2" />
-                  <span>Flat-screen TV</span>
-                </div>
-                <div className="flex items-center">
-                  <Coffee className="h-5 w-5 mr-2" />
-                  <span>Coffee maker</span>
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
           <div className="flex items-center justify-between">
