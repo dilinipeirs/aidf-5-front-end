@@ -4,7 +4,13 @@ export function HotelGrid({ hotels, viewMode }) {
   if (hotels.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="text-6xl mb-4">🏨</div>
+        <div className="text-6xl mb-4">
+          <img
+                src="https://www.nicepng.com/png/detail/366-3662305_free-png-white-paper-planplane-png-images-transparent.png"
+                alt="No bookings"
+                className="w-80 h-40 object-contain opacity-70 grayscale"
+          />
+        </div>
         <h3 className="text-xl font-semibold mb-2">No hotels found</h3>
         <p className="text-muted-foreground">Try adjusting your filters to see more results</p>
       </div>

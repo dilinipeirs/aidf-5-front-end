@@ -103,6 +103,14 @@ export default function HotelsPage(
     error: hotelsError,
   } = useGetAllHotelsQuery();
 
+
+  const {
+    data: locationObjects,
+    isLoading: isLocationsLoading,
+    isError: isLocationsError,
+    error: locationsError,
+  } = useGetAllLocationsQuery();
+
   const [viewMode, setViewMode] = useState("grid")
   const [sortBy, setSortBy] = useState("featured")
   const [filters, setFilters] = useState({
@@ -173,7 +181,12 @@ export default function HotelsPage(
   // Pagination
   const indexOfLastHotel = currentPage * hotelsPerPage
   const indexOfFirstHotel = indexOfLastHotel - hotelsPerPage
+
+  console.log(indexOfLastHotel);
+  console.log(indexOfFirstHotel);
+
   const currentHotels = filteredHotels.slice(indexOfFirstHotel, indexOfLastHotel)
+  console.log(currentHotels);
   const totalPages = Math.ceil(filteredHotels.length / hotelsPerPage)
 
   return (
@@ -186,7 +199,7 @@ export default function HotelsPage(
           <p className="text-muted-foreground">Browse our collection of premium hotels worldwide</p>
         </div>
 
-        {isHotelsError && (
+        {(isHotelsError || isLocationsError) && (
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
@@ -199,7 +212,7 @@ export default function HotelsPage(
           </div>
         )}
 
-        {isHotelsLoading && !isHotelsError && (
+        {(isHotelsLoading || isLocationsLoading) && !(isHotelsError || isLocationsError) && (
           <div className="flex gap-8">
             <aside className="hidden lg:block w-80 flex-shrink-0">
               <div className="space-y-4">
@@ -219,11 +232,11 @@ export default function HotelsPage(
           </div>
         )}
 
-        {!isHotelsLoading && !hotelsError && (
+        {!(isHotelsLoading || isLocationsLoading) && !hotelsError && (
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block w-80 flex-shrink-0">
-              <FilterSidebar filters={filters} setFilters={setFilters} />
+              <FilterSidebar locationObjects={locationObjects} filters={filters} setFilters={setFilters} />
             </aside>
 
             {/* Main Content */}
@@ -242,7 +255,7 @@ export default function HotelsPage(
                       </Button>
                     </SheetTrigger>
                     <SheetContent side="left" className="w-80 overflow-y-auto">
-                      <FilterSidebar filters={filters} setFilters={setFilters} />
+                      <FilterSidebar locationObjects={locationObjects} filters={filters} setFilters={setFilters} />
                     </SheetContent>
                   </Sheet>
                 </div>
@@ -254,7 +267,7 @@ export default function HotelsPage(
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="featured">Featured</SelectItem>
+                      <SelectItem value="featured">Featured / Recommended</SelectItem>
                       <SelectItem value="price-low">Price: Low to High</SelectItem>
                       <SelectItem value="price-high">Price: High to Low</SelectItem>
                       <SelectItem value="rating">Rating: High to Low</SelectItem>
@@ -283,8 +296,6 @@ export default function HotelsPage(
                   </div>
                 </div>
               </div>
-
-              console.log(currentHotels);
 
               {/* Hotel Grid */}
               <HotelGrid hotels={currentHotels} viewMode={viewMode} />

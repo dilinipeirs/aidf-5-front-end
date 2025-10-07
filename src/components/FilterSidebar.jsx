@@ -10,7 +10,8 @@ import { Badge } from "@/components/ui/badge"
 import { X, Search } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
-const locations = ["Paris", "Lyon", "Nice", "Bordeaux", "Marseille", "Chamonix", "Cannes", "Toulouse"]
+// const locations = ["Paris", "Lyon", "Nice", "Bordeaux", "Marseille", "Chamonix", "Cannes", "Toulouse"]
+
 
 const amenities = [
   "WiFi",
@@ -25,7 +26,13 @@ const amenities = [
   "Room Service",
 ]
 
-export function FilterSidebar({ filters, setFilters }) {
+export function FilterSidebar({ locationObjects, filters, setFilters }) {
+
+  console.log(locationObjects);
+
+  // iterate through locationObjects and prepare a locations array
+  const locations = locationObjects?.map(locationObj => locationObj.name);
+
   const [locationSearch, setLocationSearch] = useState("")
   const [priceRange, setPriceRange] = useState(filters.priceRange)
 
@@ -50,7 +57,7 @@ export function FilterSidebar({ filters, setFilters }) {
   const toggleAmenity = (amenity) => {
     setFilters((prev) => ({
       ...prev,
-      amenities: prev.amenities.includes(amenity)
+      amenities: prev.amenities?.includes(amenity)
         ? prev.amenities.filter((a) => a !== amenity)
         : [...prev.amenities, amenity],
     }))
@@ -86,9 +93,9 @@ export function FilterSidebar({ filters, setFilters }) {
   const filteredLocations = locations.filter((loc) => loc.toLowerCase().includes(locationSearch.toLowerCase()))
 
   const hasActiveFilters =
-    filters.locations.length > 0 ||
-    filters.starRatings.length > 0 ||
-    filters.amenities.length > 0 ||
+    filters.locations?.length > 0 ||
+    filters.starRatings?.length > 0 ||
+    filters.amenities?.length > 0 ||
     filters.guestRating > 0 ||
     filters.priceRange[0] !== 0 ||
     filters.priceRange[1] !== 500

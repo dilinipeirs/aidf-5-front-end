@@ -26,11 +26,12 @@ export function HotelCardComplex({ hotel, viewMode }) {
           {/* Image Section */}
           <div className="relative w-full sm:w-80 h-64 sm:h-auto flex-shrink-0 group">
             <img
-              src={hotel.images[currentImageIndex] || "/placeholder.svg"}
+              // src={hotel.images[currentImageIndex] || "/placeholder.svg"}
+              src={hotel.image || "/placeholder.svg"}
               alt={hotel.name}
               className="w-full h-full object-cover"
             />
-            {hotel.images.length > 1 && (
+            {hotel.images?.length > 1 && (
               <>
                 <Button
                   variant="secondary"
@@ -78,12 +79,12 @@ export function HotelCardComplex({ hotel, viewMode }) {
                   <span className="text-sm text-muted-foreground">({hotel.reviews} reviews)</span>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {hotel.amenities.slice(0, 5).map((amenity) => (
+                  {hotel.amenities?.slice(0, 5).map((amenity) => (
                     <Badge key={amenity} variant="secondary">
                       {amenity}
                     </Badge>
                   ))}
-                  {hotel.amenities.length > 5 && <Badge variant="secondary">+{hotel.amenities.length - 5} more</Badge>}
+                  {hotel.amenities?.length > 5 && <Badge variant="secondary">+{hotel.amenities?.length - 5} more</Badge>}
                 </div>
               </div>
               <div className="flex items-center justify-between pt-4 border-t">
@@ -109,11 +110,12 @@ export function HotelCardComplex({ hotel, viewMode }) {
       {/* Image Section */}
       <div className="relative h-56 group">
         <img
-          src={hotel.images[currentImageIndex] || "/placeholder.svg"}
+          // src={hotel.images[currentImageIndex] || "/placeholder.svg"}
+          src={hotel.image || "/placeholder.svg"}
           alt={hotel.name}
           className="w-full h-full object-cover"
         />
-        {hotel.images.length > 1 && (
+        {hotel.images?.length > 1 && (
           <>
             <Button
               variant="secondary"
@@ -159,14 +161,14 @@ export function HotelCardComplex({ hotel, viewMode }) {
           <span className="text-sm text-muted-foreground">({hotel.reviews} reviews)</span>
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
-          {hotel.amenities.slice(0, 3).map((amenity) => (
+          {hotel.amenities?.slice(0, 3).map((amenity) => (
             <Badge key={amenity} variant="secondary" className="text-xs">
               {amenity}
             </Badge>
           ))}
-          {hotel.amenities.length > 3 && (
+          {hotel.amenities?.length > 3 && (
             <Badge variant="secondary" className="text-xs">
-              +{hotel.amenities.length - 3}
+              +{hotel.amenities?.length - 3}
             </Badge>
           )}
         </div>
