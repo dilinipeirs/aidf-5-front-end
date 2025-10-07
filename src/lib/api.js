@@ -71,6 +71,10 @@ export const api = createApi({
       query: () => "locations",
       providesTags: (result, error, id) => [{ type: "Locations", id: "LIST" }],
     }),
+    getAllAmenities: build.query({
+      query: () => "amenities",
+      providesTags: (result, error, id) => [{ type: "Amenities", id: "LIST" }],
+    }),
     addLocation: build.mutation({
       query: (location) => ({
         url: "locations",
@@ -110,5 +114,6 @@ export const {
   useGetCheckoutSessionStatusQuery,
   useAddLocationMutation,
   useGetAllLocationsQuery,
+  useGetAllAmenitiesQuery,
   useAddReviewMutation,
 } = api;

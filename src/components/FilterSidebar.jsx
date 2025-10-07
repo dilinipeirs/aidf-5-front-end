@@ -10,28 +10,13 @@ import { Badge } from "@/components/ui/badge"
 import { X, Search } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
-// const locations = ["Paris", "Lyon", "Nice", "Bordeaux", "Marseille", "Chamonix", "Cannes", "Toulouse"]
-
-
-const amenities = [
-  "WiFi",
-  "Pool",
-  "Gym",
-  "Spa",
-  "Restaurant",
-  "Bar",
-  "Parking",
-  "Pet Friendly",
-  "Airport Shuttle",
-  "Room Service",
-]
-
-export function FilterSidebar({ locationObjects, filters, setFilters }) {
+export function FilterSidebar({ locationObjects, amenityObjects, filters, setFilters }) {
 
   // console.log(locationObjects);
 
-  // iterate through locationObjects and prepare a locations array
-  const locations = locationObjects?.map(locationObj => locationObj.name);
+  // iterate through locationObjects, and amenityObjects, and prepare a locations and amenities arrays
+  const locations = locationObjects?.map(locationObj => locationObj.name); 
+  const amenities = amenityObjects?.map(amenityObj => amenityObj.name);
 
   const [locationSearch, setLocationSearch] = useState("")
   const [priceRange, setPriceRange] = useState(filters.priceRange)

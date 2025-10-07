@@ -7,90 +7,8 @@ import { Button } from "@/components/ui/button"
 import { LayoutGrid, List, SlidersHorizontal } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useGetAllHotelsQuery, useGetAllLocationsQuery } from "@/lib/api";
+import { useGetAllHotelsQuery, useGetAllLocationsQuery, useGetAllAmenitiesQuery } from "@/lib/api";
 import { HotelGridSkeleton } from "@/components/HotelGridSkeleton"
-
-// // Mock hotel data
-// const mockHotels = [
-//   {
-//     id: 1,
-//     name: "Grand Paris Vista",
-//     location: "Paris, France",
-//     rating: 4.7,
-//     reviews: 342,
-//     price: 160,
-//     image: "/luxury-hotel-room-paris.jpg",
-//     images: ["/luxury-hotel-room-paris.jpg", "/modern-hotel-bedroom.jpg"],
-//     amenities: ["WiFi", "Pool", "Gym", "Spa", "Restaurant"],
-//     starRating: 5,
-//     guestRating: 4.7,
-//   },
-//   {
-//     id: 2,
-//     name: "Royal Lyon Harbor",
-//     location: "Lyon, France",
-//     rating: 4.6,
-//     reviews: 289,
-//     price: 170,
-//     image: "/modern-hotel-bedroom.jpg",
-//     images: ["/modern-hotel-bedroom.jpg", "/luxury-hotel-room-paris.jpg"],
-//     amenities: ["WiFi", "Pool", "Parking", "Restaurant"],
-//     starRating: 4,
-//     guestRating: 4.6,
-//   },
-//   {
-//     id: 3,
-//     name: "Elegant Nice Gardens",
-//     location: "Nice, France",
-//     rating: 4.5,
-//     reviews: 198,
-//     price: 180,
-//     image: "/elegant-hotel-dining-room.jpg",
-//     images: ["/elegant-hotel-dining-room.jpg", "/luxury-hotel-room-paris.jpg"],
-//     amenities: ["WiFi", "Gym", "Spa", "Bar"],
-//     starRating: 5,
-//     guestRating: 4.5,
-//   },
-//   {
-//     id: 4,
-//     name: "Majestic Bordeaux Plaza",
-//     location: "Bordeaux, France",
-//     rating: 4.6,
-//     reviews: 256,
-//     price: 190,
-//     image: "/luxury-hotel-room-paris.jpg",
-//     images: ["/luxury-hotel-room-paris.jpg", "/modern-hotel-bedroom.jpg"],
-//     amenities: ["WiFi", "Pool", "Gym", "Restaurant", "Bar"],
-//     starRating: 5,
-//     guestRating: 4.6,
-//   },
-//   {
-//     id: 5,
-//     name: "Coastal Retreat Marseille",
-//     location: "Marseille, France",
-//     rating: 4.3,
-//     reviews: 167,
-//     price: 140,
-//     image: "/modern-hotel-bedroom.jpg",
-//     images: ["/modern-hotel-bedroom.jpg", "/elegant-hotel-dining-room.jpg"],
-//     amenities: ["WiFi", "Pool", "Parking"],
-//     starRating: 4,
-//     guestRating: 4.3,
-//   },
-//   {
-//     id: 6,
-//     name: "Alpine Lodge Chamonix",
-//     location: "Chamonix, France",
-//     rating: 4.8,
-//     reviews: 412,
-//     price: 220,
-//     image: "/elegant-hotel-dining-room.jpg",
-//     images: ["/elegant-hotel-dining-room.jpg", "/luxury-hotel-room-paris.jpg"],
-//     amenities: ["WiFi", "Spa", "Restaurant", "Bar", "Ski Storage"],
-//     starRating: 5,
-//     guestRating: 4.8,
-//   },
-// ]
 
 export default function HotelsPage(
   // { hotels = [], isLoading = false, isError = false, error = null }
@@ -110,6 +28,13 @@ export default function HotelsPage(
     isError: isLocationsError,
     error: locationsError,
   } = useGetAllLocationsQuery();
+
+  const {
+    data: amenityObjects,
+    isLoading: isAmenitiesLoading,
+    isError: isAmenitiesError,
+    error: amenitiesError,
+  } = useGetAllAmenitiesQuery();
 
   const [viewMode, setViewMode] = useState("grid")
   const [sortBy, setSortBy] = useState("featured")
@@ -236,7 +161,7 @@ export default function HotelsPage(
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block w-80 flex-shrink-0">
-              <FilterSidebar locationObjects={locationObjects} filters={filters} setFilters={setFilters} />
+              <FilterSidebar locationObjects={locationObjects} amenityObjects={amenityObjects} filters={filters} setFilters={setFilters} />
             </aside>
 
             {/* Main Content */}
@@ -255,7 +180,7 @@ export default function HotelsPage(
                       </Button>
                     </SheetTrigger>
                     <SheetContent side="left" className="w-80 overflow-y-auto">
-                      <FilterSidebar locationObjects={locationObjects} filters={filters} setFilters={setFilters} />
+                      <FilterSidebar locationObjects={locationObjects} amenityObjects={amenityObjects} filters={filters} setFilters={setFilters} />
                     </SheetContent>
                   </Sheet>
                 </div>
