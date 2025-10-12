@@ -2,14 +2,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Sparkles } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { setQuery } from "@/lib/features/searchSlice";
 
 export default function AISearch() {
   const dispatch = useDispatch();
+  const query = useSelector((state) => state.search.query);
 
   const [value, setValue] = useState("");
+
+  // Clear input when query is reset
+  useEffect(() => {
+    if (query === "") {
+      setValue("");
+    }
+  }, [query]);
 
   function handleSearch() {
     dispatch(setQuery(value));
