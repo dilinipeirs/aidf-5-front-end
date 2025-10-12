@@ -1,4 +1,4 @@
-# Nomora - Smart Hotel Platform
+# Wanderly - Smart Hotel Platform
 
 This project was done to familiarize myself with the MERN stack.
 
