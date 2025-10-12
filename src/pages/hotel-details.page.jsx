@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAddReviewMutation, useCreateBookingMutation, useGetHotelByIdQuery } from "@/lib/api";
 import { useUser } from "@clerk/clerk-react";
-import { Building2, Coffee, MapPin, PlusCircle, Star, Tv, Wifi, ChevronLeft, ChevronRight, Car, Dumbbell, Utensils, Waves, Shield, ParkingCircle, AirVent, Bed, Phone, Heart, Plane } from "lucide-react";
+import { Building2, Coffee, MapPin, PlusCircle, Star, Wifi, ChevronLeft, ChevronRight, Dumbbell, Utensils, Waves, ParkingCircle, Bed, Phone, Heart, Plane } from "lucide-react";
 import { useParams } from "react-router";
 import { BookingDialog } from "@/components/BookingDialog";
 import { useNavigate } from "react-router";
@@ -46,7 +46,7 @@ const HotelDetailsPage = () => {
     
     // Spa
     if (amenityLower === 'spa') {
-      return <Waves className="h-5 w-5 mr-2" />;
+      return <Bed className="h-5 w-5 mr-2" />;
     }
     
     // Restaurant
