@@ -49,10 +49,25 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
   }
 
   const handlePriceChange = (value) => {
-    setPriceRange(value)
+    // Ensure proper range validation
+    const [min, max] = value
+    let validatedValue = value
+    
+    // If min exceeds max, swap them to maintain logical range
+    if (min > max) {
+      validatedValue = [max, min]
+    }
+    
+    // Ensure values are within bounds
+    validatedValue = [
+      Math.max(0, Math.min(500, validatedValue[0])),
+      Math.max(0, Math.min(500, validatedValue[1]))
+    ]
+    
+    setPriceRange(validatedValue)
     setFilters((prev) => ({
       ...prev,
-      priceRange: value,
+      priceRange: validatedValue,
     }))
   }
 
@@ -218,7 +233,15 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       <div className="space-y-4">
         <h4 className="font-medium">Price Range</h4>
         <div className="space-y-4">
-          <Slider value={priceRange} onValueChange={handlePriceChange} max={500} step={10} className="w-full" />
+          <Slider 
+            value={priceRange} 
+            onValueChange={handlePriceChange} 
+            min={0}
+            max={500} 
+            step={10} 
+            className="w-full"
+            disabled={false}
+          />
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">${priceRange[0]}</span>
             <span className="text-muted-foreground">${priceRange[1]}</span>
