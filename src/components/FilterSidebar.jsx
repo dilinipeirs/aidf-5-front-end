@@ -131,7 +131,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
           ))}
           {filters.starRatings.map((rating) => (
             <Badge key={rating} variant="secondary" className="gap-1 flex items-center">
-              {rating} Star
+              {rating}+ Star
               <button
                 className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
                 onClick={(e) => {
@@ -265,7 +265,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
               <Label htmlFor={`star-${rating}`} className="text-sm font-normal cursor-pointer flex items-center">
                 {"⭐".repeat(rating)}
                 <span className="ml-2 text-muted-foreground">
-                  {rating} Star{rating > 1 ? "s" : ""}
+                  {rating}+ Star{rating > 1 ? "s" : ""}
                 </span>
               </Label>
             </div>
