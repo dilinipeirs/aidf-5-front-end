@@ -124,7 +124,7 @@ export default function HotelsPage(
           <p className="text-muted-foreground">Browse our collection of premium hotels worldwide</p>
         </div>
 
-        {(isHotelsError || isLocationsError) && (
+        {(isHotelsError || isLocationsError || isAmenitiesError) && (
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
@@ -137,7 +137,7 @@ export default function HotelsPage(
           </div>
         )}
 
-        {(isHotelsLoading || isLocationsLoading) && !(isHotelsError || isLocationsError) && (
+        {(isHotelsLoading || isLocationsLoading || isAmenitiesLoading) && !(isHotelsError || isLocationsError || isAmenitiesError) && (
           <div className="flex gap-8">
             <aside className="hidden lg:block w-80 flex-shrink-0">
               <div className="space-y-4">
@@ -157,7 +157,7 @@ export default function HotelsPage(
           </div>
         )}
 
-        {!(isHotelsLoading || isLocationsLoading) && !hotelsError && (
+        {!(isHotelsLoading || isLocationsLoading || isAmenitiesLoading) && !(hotelsError || locationsError || amenitiesError) && (
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block w-80 flex-shrink-0">

@@ -216,7 +216,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       <div className="space-y-4">
         <h4 className="font-medium">Amenities</h4>
         <div className="space-y-3 max-h-48 overflow-y-auto">
-          {amenities.map((amenity) => (
+          {amenities?.map((amenity) => (
             <div key={amenity} className="flex items-center space-x-2">
               <Checkbox
                 id={`amenity-${amenity}`}
