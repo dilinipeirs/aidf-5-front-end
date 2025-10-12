@@ -14,3 +14,5 @@ AI tools used during developments
 - Cursor has been used as the main IDE and this project was used to try-out vibe coding as well
 - https://v0.app/ was used to aid in generating UIs through natural language prompts
 
+Task breakdown for the developments
+- https://docs.google.com/spreadsheets/d/1_mkPTy-zJvOJiTuqK6-T-TxE5UYOUKzOPN22QBjkXcY/edit?gid=1386082183#gid=1386082183
