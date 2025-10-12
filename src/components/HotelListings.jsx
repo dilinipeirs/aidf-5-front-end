@@ -4,9 +4,19 @@ import { useState } from "react";
 import { toast } from "sonner";
 import LocationTab from "./LocationTab";
 import { Skeleton } from "./ui/skeleton";
+import { Button } from "./ui/button";
+import { X } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { resetQuery } from "@/lib/features/searchSlice";
 
 function HotelListings() {
+  const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState(0);
+
+  const handleClearResults = () => {
+    dispatch(resetQuery());
+    setSelectedLocation(0); // Reset to "All" location
+  };
 
   const {
     data: hotels,
@@ -49,13 +59,27 @@ function HotelListings() {
     return (
       <section className="px-8 py-8 lg:py-8">
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Top trending hotels worldwide
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Discover the most trending hotels worldwide for an unforgettable
-            experience.
-          </p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Top trending hotels worldwide
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Discover the most trending hotels worldwide for an unforgettable
+                experience.
+              </p>
+            </div>
+            {selectedLocation !== 0 && (
+              <Button
+                variant="outline"
+                onClick={handleClearResults}
+                className="flex items-center gap-2"
+              >
+                <X className="h-4 w-4" />
+                Clear Search
+              </Button>
+            )}
+          </div>
         </div>
 
         <Skeleton className="h-6 flex items-center flex-wrap gap-x-4" />
@@ -69,13 +93,27 @@ function HotelListings() {
     return (
       <section className="px-8 py-8 lg:py-8">
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Top trending hotels worldwide
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Discover the most trending hotels worldwide for an unforgettable
-            experience.
-          </p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Top trending hotels worldwide
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Discover the most trending hotels worldwide for an unforgettable
+                experience.
+              </p>
+            </div>
+            {selectedLocation !== 0 && (
+              <Button
+                variant="outline"
+                onClick={handleClearResults}
+                className="flex items-center gap-2"
+              >
+                <X className="h-4 w-4" />
+                Clear Search
+              </Button>
+            )}
+          </div>
         </div>
         <p className="text-red-500">Error loading data </p>
       </section>
@@ -85,13 +123,27 @@ function HotelListings() {
   return (
     <section className="px-8 py-8 lg:py-8">
       <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Top trending hotels worldwide
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          Discover the most trending hotels worldwide for an unforgettable
-          experience.
-        </p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Top trending hotels worldwide
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Discover the most trending hotels worldwide for an unforgettable
+              experience.
+            </p>
+          </div>
+          {selectedLocation !== 0 && (
+            <Button
+              variant="outline"
+              onClick={handleClearResults}
+              className="flex items-center gap-2"
+            >
+              <X className="h-4 w-4" />
+              Clear Search
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="flex items-center flex-wrap gap-x-4">

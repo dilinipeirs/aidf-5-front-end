@@ -192,7 +192,7 @@ export default function HotelsPage(
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="featured">Featured / Recommended</SelectItem>
+                      <SelectItem value="featured">Recommended</SelectItem>
                       <SelectItem value="price-low">Price: Low to High</SelectItem>
                       <SelectItem value="price-high">Price: High to Low</SelectItem>
                       <SelectItem value="rating">Rating: High to Low</SelectItem>
