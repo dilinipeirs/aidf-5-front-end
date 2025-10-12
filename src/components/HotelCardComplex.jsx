@@ -210,15 +210,18 @@ export function HotelCardComplex({ hotel, viewMode }) {
             >
               View Details
             </Button>
-            <BookingDialog
+            {/* <BookingDialog
                     hotelName={hotel.name}
                     hotelId={hotel._id}
                     onSubmit={handleBook}
                     isLoading={isCreateBookingLoading}
-            />
-            {/* <Button size="sm" className="w-full">
+            /> */}
+            <Button size="sm" className="w-full" onClick={() => {
+              const hotelId = hotel._id || hotel.id;
+              navigate(`/hotels/${hotelId}`);
+            }}>
               Book Now
-            </Button> */}
+            </Button>
           </div>
         </div>
       </CardContent>

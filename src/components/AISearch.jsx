@@ -2,17 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Sparkles } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { setQuery } from "@/lib/features/searchSlice";
 
 export default function AISearch() {
   const dispatch = useDispatch();
+  const query = useSelector((state) => state.search.query);
 
   const [value, setValue] = useState("");
 
+  // Clear input when query is reset
+  useEffect(() => {
+    if (query === "") {
+      setValue("");
+    }
+  }, [query]);
+
   function handleSearch() {
     dispatch(setQuery(value));
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   }
 
   return (
@@ -25,6 +39,7 @@ export default function AISearch() {
             value={value}
             className="bg-[#1a1a1a] text-sm sm:text-base text-white placeholder:text-white/70 placeholder:text-sm sm:placeholder:text-base sm:placeholder:content-['Describe_your_destination...'] border-0 rounded-full py-6 pl-4 pr-12 sm:pr-32 w-full transition-all"
             onChange={(e) => setValue(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
 

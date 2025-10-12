@@ -65,9 +65,19 @@ export default function HotelsPage(
     // Filter by price range
     result = result.filter((hotel) => hotel.price >= filters.priceRange[0] && hotel.price <= filters.priceRange[1])
 
-    // Filter by star rating
+    // Filter by star rating (at least the selected rating)
     if (filters.starRatings.length > 0) {
-      result = result.filter((hotel) => filters.starRatings.includes(hotel.starRating))
+      console.log('Star rating filter:', filters.starRatings)
+      result = result.filter((hotel) => {
+        const matches = filters.starRatings.some((selectedRating) => {
+          const hotelRating = parseFloat(hotel.rating)
+          const selectedRatingNum = parseFloat(selectedRating)
+          const meetsCriteria = hotelRating >= selectedRatingNum
+          console.log(`Hotel ${hotel.name}: ${hotelRating} >= ${selectedRatingNum} = ${meetsCriteria}`)
+          return meetsCriteria
+        })
+        return matches
+      })
     }
 
     // Filter by amenities
@@ -124,7 +134,7 @@ export default function HotelsPage(
           <p className="text-muted-foreground">Browse our collection of premium hotels worldwide</p>
         </div>
 
-        {(isHotelsError || isLocationsError) && (
+        {(isHotelsError || isLocationsError || isAmenitiesError) && (
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
               <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
@@ -137,7 +147,7 @@ export default function HotelsPage(
           </div>
         )}
 
-        {(isHotelsLoading || isLocationsLoading) && !(isHotelsError || isLocationsError) && (
+        {(isHotelsLoading || isLocationsLoading || isAmenitiesLoading) && !(isHotelsError || isLocationsError || isAmenitiesError) && (
           <div className="flex gap-8">
             <aside className="hidden lg:block w-80 flex-shrink-0">
               <div className="space-y-4">
@@ -157,7 +167,7 @@ export default function HotelsPage(
           </div>
         )}
 
-        {!(isHotelsLoading || isLocationsLoading) && !hotelsError && (
+        {!(isHotelsLoading || isLocationsLoading || isAmenitiesLoading) && !(hotelsError || locationsError || amenitiesError) && (
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block w-80 flex-shrink-0">

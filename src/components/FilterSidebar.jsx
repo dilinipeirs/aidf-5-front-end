@@ -49,10 +49,25 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
   }
 
   const handlePriceChange = (value) => {
-    setPriceRange(value)
+    // Ensure proper range validation
+    const [min, max] = value
+    let validatedValue = value
+    
+    // If min exceeds max, swap them to maintain logical range
+    if (min > max) {
+      validatedValue = [max, min]
+    }
+    
+    // Ensure values are within bounds
+    validatedValue = [
+      Math.max(0, Math.min(500, validatedValue[0])),
+      Math.max(0, Math.min(500, validatedValue[1]))
+    ]
+    
+    setPriceRange(validatedValue)
     setFilters((prev) => ({
       ...prev,
-      priceRange: value,
+      priceRange: validatedValue,
     }))
   }
 
@@ -101,23 +116,84 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       {hasActiveFilters && (
         <div className="flex flex-wrap gap-2">
           {filters.locations.map((location) => (
-            <Badge key={location} variant="secondary" className="gap-1">
+            <Badge key={location} variant="secondary" className="gap-1 flex items-center">
               {location}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleLocation(location)} />
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLocation(location);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
           {filters.starRatings.map((rating) => (
-            <Badge key={rating} variant="secondary" className="gap-1">
-              {rating} Star
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleStarRating(rating)} />
+            <Badge key={rating} variant="secondary" className="gap-1 flex items-center">
+              {rating}+ Star
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleStarRating(rating);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
           {filters.amenities.map((amenity) => (
-            <Badge key={amenity} variant="secondary" className="gap-1">
+            <Badge key={amenity} variant="secondary" className="gap-1 flex items-center">
               {amenity}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleAmenity(amenity)} />
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleAmenity(amenity);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
+          {/* Price Range Filter Chip */}
+          {(filters.priceRange[0] !== 0 || filters.priceRange[1] !== 500) && (
+            <Badge variant="secondary" className="gap-1 flex items-center">
+              ${filters.priceRange[0]} - ${filters.priceRange[1]}
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFilters((prev) => ({
+                    ...prev,
+                    priceRange: [0, 500],
+                  }));
+                  setPriceRange([0, 500]);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
+            </Badge>
+          )}
+          {/* Guest Rating Filter Chip */}
+          {filters.guestRating > 0 && (
+            <Badge variant="secondary" className="gap-1 flex items-center">
+              {filters.guestRating}+ Rating
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFilters((prev) => ({
+                    ...prev,
+                    guestRating: 0,
+                  }));
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
+            </Badge>
+          )}
         </div>
       )}
 
@@ -157,7 +233,15 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       <div className="space-y-4">
         <h4 className="font-medium">Price Range</h4>
         <div className="space-y-4">
-          <Slider value={priceRange} onValueChange={handlePriceChange} max={500} step={10} className="w-full" />
+          <Slider 
+            value={priceRange} 
+            onValueChange={handlePriceChange} 
+            min={0}
+            max={500} 
+            step={10} 
+            className="w-full"
+            disabled={false}
+          />
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">${priceRange[0]}</span>
             <span className="text-muted-foreground">${priceRange[1]}</span>
@@ -181,7 +265,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
               <Label htmlFor={`star-${rating}`} className="text-sm font-normal cursor-pointer flex items-center">
                 {"⭐".repeat(rating)}
                 <span className="ml-2 text-muted-foreground">
-                  {rating} Star{rating > 1 ? "s" : ""}
+                  {rating}+ Star{rating > 1 ? "s" : ""}
                 </span>
               </Label>
             </div>
@@ -216,7 +300,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       <div className="space-y-4">
         <h4 className="font-medium">Amenities</h4>
         <div className="space-y-3 max-h-48 overflow-y-auto">
-          {amenities.map((amenity) => (
+          {amenities?.map((amenity) => (
             <div key={amenity} className="flex items-center space-x-2">
               <Checkbox
                 id={`amenity-${amenity}`}
