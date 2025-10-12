@@ -2,8 +2,8 @@
 
 This project was done to familiarize myself with the MERN stack.
 
-Frontend - https://github.com/dilinipeirs/aidf-5-front-end
-Backend - https://github.com/dilinipeirs/aidf-5-back-end
+- Frontend - https://github.com/dilinipeirs/aidf-5-front-end
+- Backend - https://github.com/dilinipeirs/aidf-5-back-end
 
 Additional features
 - Clerk has been used as an identity management service.
