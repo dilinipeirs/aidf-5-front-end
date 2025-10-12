@@ -52,7 +52,7 @@ function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-charcoal-slate backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-ivory-sand py-3 mx-4 my-3 shadow-lg shadow-charcoal-slate/30">
       <div className="flex items-center space-x-8">
         <Link to="/" className="text-xl font-bold">
-          Nomora
+        Wanderly
         </Link>
         <div className="hidden md:flex space-x-6">
           <Link to={`/hotels`} className="transition-colors text-sm">
