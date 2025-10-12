@@ -37,7 +37,7 @@ export default function AISearch() {
             placeholder="Search for the experience you want" // Short placeholder for mobile
             name="query"
             value={value}
-            className="bg-[#1a1a1a] text-sm sm:text-base text-white placeholder:text-white/70 placeholder:text-sm sm:placeholder:text-base sm:placeholder:content-['Describe_your_destination...'] border-0 rounded-full py-6 pl-4 pr-12 sm:pr-32 w-full transition-all"
+            className="bg-ivory-sand text-sm sm:text-base text-charcoal-slate placeholder:text-charcoal-slate/60 placeholder:text-sm sm:placeholder:text-base sm:placeholder:content-['Describe_your_destination...'] border border-warm-taupe rounded-full py-6 pl-4 pr-12 sm:pr-32 w-full transition-all shadow-lg"
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
           />
@@ -45,10 +45,10 @@ export default function AISearch() {
 
         <Button
           type="button"
-          className="absolute right-2 h-[80%] my-auto bg-black text-white rounded-full px-2 sm:px-4 flex items-center gap-x-2 border-white border-2 hover:bg-black/80 transition-colors"
+          className="absolute right-2 h-[80%] my-auto bg-charcoal-slate text-ivory-sand rounded-full px-2 sm:px-4 flex items-center gap-x-2 border border-warm-taupe hover:bg-sage-mist hover:text-charcoal-slate transition-colors shadow-md"
           onClick={handleSearch}
         >
-          <Sparkles className="w-4 h-4 fill-white" />
+          <Sparkles className="w-4 h-4 fill-ivory-sand" />
           <span className="text-sm">AI Search</span>
         </Button>
       </div>

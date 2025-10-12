@@ -49,7 +49,7 @@ function Navigation() {
   // const count = useSelector((state) => state.counter);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-white py-3 mx-4 my-3 shadow-lg shadow-black/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-charcoal-slate backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-ivory-sand py-3 mx-4 my-3 shadow-lg shadow-charcoal-slate/30">
       <div className="flex items-center space-x-8">
         <Link to="/" className="text-xl font-bold">
           Nomora
@@ -85,7 +85,7 @@ function Navigation() {
           <Button
             size="sm"
             asChild
-            className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex"
+            className="bg-sage-mist text-charcoal-slate hover:bg-dusty-blue text-xs hidden md:flex"
           >
             <Link to="/sign-up">Sign Up</Link>
           </Button>
@@ -110,7 +110,7 @@ function Navigation() {
           <Button
             size="sm"
             asChild
-            className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex"
+            className="bg-sage-mist text-charcoal-slate hover:bg-dusty-blue text-xs hidden md:flex"
           >
             <Link to="/my-account">My Account</Link>
           </Button>
@@ -140,13 +140,13 @@ function Navigation() {
           {isMenuOpen && (
             <div
               ref={menuRef}
-              className="absolute right-0 mt-2 w-56 rounded-xl bg-black border border-gray-800 shadow-lg py-2 px-3 animate-in fade-in slide-in-from-top-5 duration-200 z-50"
+              className="absolute right-0 mt-2 w-56 rounded-xl bg-charcoal-slate border border-dusty-blue shadow-lg py-2 px-3 animate-in fade-in slide-in-from-top-5 duration-200 z-50"
               style={{ top: "calc(100% + 8px)" }}
             >
               <div className="flex flex-col space-y-3 py-2">
                 <Link
                   to="/"
-                  className="text-sm font-medium hover:text-gray-300 transition-colors"
+                  className="text-sm font-medium hover:text-sage-mist transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Home
@@ -154,13 +154,13 @@ function Navigation() {
                 {user?.publicMetadata?.role === "admin" && (
                   <Link
                     to="/hotels/create"
-                    className="text-sm font-medium hover:text-gray-300 transition-colors"
+                    className="text-sm font-medium hover:text-sage-mist transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Create Hotel
                   </Link>
                 )}
-                <div className="h-px bg-white/20 my-1"></div>
+                <div className="h-px bg-ivory-sand/20 my-1"></div>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -172,14 +172,14 @@ function Navigation() {
                 <SignedOut>
                   <a
                     href="/sign-in"
-                    className="text-sm font-medium hover:text-gray-300 transition-colors"
+                    className="text-sm font-medium hover:text-sage-mist transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Log In
                   </a>
                   <Button
                     size="sm"
-                    className="bg-white text-black hover:bg-gray-200 w-full mt-2"
+                    className="bg-sage-mist text-charcoal-slate hover:bg-dusty-blue w-full mt-2"
                     asChild
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -188,7 +188,7 @@ function Navigation() {
                 </SignedOut>
                 {/* <Link
                   to="/sign-in"
-                  className="text-sm font-medium hover:text-gray-300 transition-colors"
+                  className="text-sm font-medium hover:text-sage-mist transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Log In
@@ -204,7 +204,7 @@ function Navigation() {
                 <SignedIn>
                   <Button
                     size="sm"
-                    className="bg-white text-black hover:bg-gray-200 w-full mt-2"
+                    className="bg-sage-mist text-charcoal-slate hover:bg-dusty-blue w-full mt-2"
                     asChild
                     onClick={() => setIsMenuOpen(false)}
                   >
