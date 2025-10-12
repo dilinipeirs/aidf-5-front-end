@@ -15,6 +15,12 @@ export default function AISearch() {
     dispatch(setQuery(value));
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  }
+
   return (
     <div className="z-10 w-full max-w-lg">
       <div className="relative flex items-center">
@@ -25,6 +31,7 @@ export default function AISearch() {
             value={value}
             className="bg-[#1a1a1a] text-sm sm:text-base text-white placeholder:text-white/70 placeholder:text-sm sm:placeholder:text-base sm:placeholder:content-['Describe_your_destination...'] border-0 rounded-full py-6 pl-4 pr-12 sm:pr-32 w-full transition-all"
             onChange={(e) => setValue(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
 
