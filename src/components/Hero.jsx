@@ -79,12 +79,12 @@ export default function Hero() {
           )}
           style={{ backgroundImage: `url(${image})` }}
         >
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/20"></div>
         </div>
       ))}
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center text-white justify-center h-full px-4 sm:px-8">
+      <div className="relative z-10 flex flex-col items-center text-ivory-sand justify-center h-full px-4 sm:px-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
           Find Your Best Staycation
         </h1>
@@ -125,7 +125,7 @@ export default function Hero() {
               className={cn(
                 "h-3 transition-all rounded-full",
                 currentSlide === index
-                  ? "bg-white w-8"
+                  ? "bg-ivory-sand w-8"
                   : "bg-white/50 w-3 hover:bg-white/70"
               )}
               aria-label={`Go to slide ${index + 1}`}

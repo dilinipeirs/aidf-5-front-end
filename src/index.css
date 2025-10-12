@@ -43,71 +43,81 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  
+  /* Nomora Brand Palette - "Wander Calm" */
+  --charcoal-slate: #2E3D3A;
+  --sage-mist: #A7B8A4;
+  --ivory-sand: #F7F4EE;
+  --dusty-blue: #8FA6A0;
+  --warm-taupe: #D7CFC7;
+  
+  /* Updated theme colors using brand palette */
+  --background: #F7F4EE; /* Ivory Sand */
+  --foreground: #2E3D3A; /* Charcoal Slate */
+  --card: #F7F4EE; /* Ivory Sand */
+  --card-foreground: #2E3D3A; /* Charcoal Slate */
+  --popover: #F7F4EE; /* Ivory Sand */
+  --popover-foreground: #2E3D3A; /* Charcoal Slate */
+  --primary: #2E3D3A; /* Charcoal Slate */
+  --primary-foreground: #F7F4EE; /* Ivory Sand */
+  --secondary: #A7B8A4; /* Sage Mist */
+  --secondary-foreground: #2E3D3A; /* Charcoal Slate */
+  --muted: #D7CFC7; /* Warm Taupe */
+  --muted-foreground: #2E3D3A; /* Charcoal Slate */
+  --accent: #8FA6A0; /* Dusty Blue */
+  --accent-foreground: #F7F4EE; /* Ivory Sand */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: #D7CFC7; /* Warm Taupe */
+  --input: #D7CFC7; /* Warm Taupe */
+  --ring: #8FA6A0; /* Dusty Blue */
+  --chart-1: #2E3D3A; /* Charcoal Slate */
+  --chart-2: #A7B8A4; /* Sage Mist */
+  --chart-3: #8FA6A0; /* Dusty Blue */
+  --chart-4: #D7CFC7; /* Warm Taupe */
+  --chart-5: #F7F4EE; /* Ivory Sand */
+  --sidebar: #F7F4EE; /* Ivory Sand */
+  --sidebar-foreground: #2E3D3A; /* Charcoal Slate */
+  --sidebar-primary: #2E3D3A; /* Charcoal Slate */
+  --sidebar-primary-foreground: #F7F4EE; /* Ivory Sand */
+  --sidebar-accent: #A7B8A4; /* Sage Mist */
+  --sidebar-accent-foreground: #2E3D3A; /* Charcoal Slate */
+  --sidebar-border: #D7CFC7; /* Warm Taupe */
+  --sidebar-ring: #8FA6A0; /* Dusty Blue */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Dark mode using brand palette with adjusted contrast */
+  --background: #2E3D3A; /* Charcoal Slate */
+  --foreground: #F7F4EE; /* Ivory Sand */
+  --card: #2E3D3A; /* Charcoal Slate */
+  --card-foreground: #F7F4EE; /* Ivory Sand */
+  --popover: #2E3D3A; /* Charcoal Slate */
+  --popover-foreground: #F7F4EE; /* Ivory Sand */
+  --primary: #A7B8A4; /* Sage Mist */
+  --primary-foreground: #2E3D3A; /* Charcoal Slate */
+  --secondary: #8FA6A0; /* Dusty Blue */
+  --secondary-foreground: #F7F4EE; /* Ivory Sand */
+  --muted: #8FA6A0; /* Dusty Blue */
+  --muted-foreground: #D7CFC7; /* Warm Taupe */
+  --accent: #A7B8A4; /* Sage Mist */
+  --accent-foreground: #2E3D3A; /* Charcoal Slate */
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: #8FA6A0; /* Dusty Blue */
+  --input: #8FA6A0; /* Dusty Blue */
+  --ring: #A7B8A4; /* Sage Mist */
+  --chart-1: #A7B8A4; /* Sage Mist */
+  --chart-2: #8FA6A0; /* Dusty Blue */
+  --chart-3: #D7CFC7; /* Warm Taupe */
+  --chart-4: #F7F4EE; /* Ivory Sand */
+  --chart-5: #2E3D3A; /* Charcoal Slate */
+  --sidebar: #2E3D3A; /* Charcoal Slate */
+  --sidebar-foreground: #F7F4EE; /* Ivory Sand */
+  --sidebar-primary: #A7B8A4; /* Sage Mist */
+  --sidebar-primary-foreground: #2E3D3A; /* Charcoal Slate */
+  --sidebar-accent: #8FA6A0; /* Dusty Blue */
+  --sidebar-accent-foreground: #F7F4EE; /* Ivory Sand */
+  --sidebar-border: #8FA6A0; /* Dusty Blue */
+  --sidebar-ring: #A7B8A4; /* Sage Mist */
 }
 
 @layer base {
@@ -117,4 +127,27 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom brand color utilities */
+@layer utilities {
+  .bg-charcoal-slate { background-color: var(--charcoal-slate); }
+  .text-charcoal-slate { color: var(--charcoal-slate); }
+  .border-charcoal-slate { border-color: var(--charcoal-slate); }
+  
+  .bg-sage-mist { background-color: var(--sage-mist); }
+  .text-sage-mist { color: var(--sage-mist); }
+  .border-sage-mist { border-color: var(--sage-mist); }
+  
+  .bg-ivory-sand { background-color: var(--ivory-sand); }
+  .text-ivory-sand { color: var(--ivory-sand); }
+  .border-ivory-sand { border-color: var(--ivory-sand); }
+  
+  .bg-dusty-blue { background-color: var(--dusty-blue); }
+  .text-dusty-blue { color: var(--dusty-blue); }
+  .border-dusty-blue { border-color: var(--dusty-blue); }
+  
+  .bg-warm-taupe { background-color: var(--warm-taupe); }
+  .text-warm-taupe { color: var(--warm-taupe); }
+  .border-warm-taupe { border-color: var(--warm-taupe); }
 }
