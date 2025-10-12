@@ -156,8 +156,8 @@ function CompletePage() {
         <div className="mt-6 text-center text-sm text-gray-600">
           <p>
             If you have any questions, please contact
-            <a href="mailto:bookings@example.com" className="text-blue-600 hover:underline">
-              {" "}bookings@example.com
+            <a href="mailto:nomora@bookings.com" className="text-blue-600 hover:underline">
+              {" "}nomora@bookings.com
             </a>
           </p>
         </div>

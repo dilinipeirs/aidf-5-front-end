@@ -276,7 +276,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       <Separator />
 
       {/* Guest Rating Filter */}
-      <div className="space-y-4">
+      <div className="space-y-4" hidden>
         <h4 className="font-medium">Guest Rating</h4>
         <div className="space-y-3">
           {[4.5, 4.0, 3.5].map((rating) => (
@@ -294,7 +294,7 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
         </div>
       </div>
 
-      <Separator />
+      {/* <Separator /> */}
 
       {/* Amenities Filter */}
       <div className="space-y-4">
