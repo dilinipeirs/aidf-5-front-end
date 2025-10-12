@@ -6,7 +6,9 @@ function RootLayout() {
   return (
     <>
       <Navigation />
-      <Outlet />
+      <main className="pt-20">
+        <Outlet />
+      </main>
       <Toaster />
     </>
   );
