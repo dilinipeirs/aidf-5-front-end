@@ -101,23 +101,84 @@ export function FilterSidebar({ locationObjects, amenityObjects, filters, setFil
       {hasActiveFilters && (
         <div className="flex flex-wrap gap-2">
           {filters.locations.map((location) => (
-            <Badge key={location} variant="secondary" className="gap-1">
+            <Badge key={location} variant="secondary" className="gap-1 flex items-center">
               {location}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleLocation(location)} />
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLocation(location);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
           {filters.starRatings.map((rating) => (
-            <Badge key={rating} variant="secondary" className="gap-1">
+            <Badge key={rating} variant="secondary" className="gap-1 flex items-center">
               {rating} Star
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleStarRating(rating)} />
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleStarRating(rating);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
           {filters.amenities.map((amenity) => (
-            <Badge key={amenity} variant="secondary" className="gap-1">
+            <Badge key={amenity} variant="secondary" className="gap-1 flex items-center">
               {amenity}
-              <X className="h-3 w-3 cursor-pointer" onClick={() => toggleAmenity(amenity)} />
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleAmenity(amenity);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
             </Badge>
           ))}
+          {/* Price Range Filter Chip */}
+          {(filters.priceRange[0] !== 0 || filters.priceRange[1] !== 500) && (
+            <Badge variant="secondary" className="gap-1 flex items-center">
+              ${filters.priceRange[0]} - ${filters.priceRange[1]}
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFilters((prev) => ({
+                    ...prev,
+                    priceRange: [0, 500],
+                  }));
+                  setPriceRange([0, 500]);
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
+            </Badge>
+          )}
+          {/* Guest Rating Filter Chip */}
+          {filters.guestRating > 0 && (
+            <Badge variant="secondary" className="gap-1 flex items-center">
+              {filters.guestRating}+ Rating
+              <button
+                className="ml-1 p-0.5 rounded-full hover:bg-destructive/10 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFilters((prev) => ({
+                    ...prev,
+                    guestRating: 0,
+                  }));
+                }}
+              >
+                <X className="h-3 w-3 text-muted-foreground hover:text-destructive transition-colors" />
+              </button>
+            </Badge>
+          )}
         </div>
       )}
 
