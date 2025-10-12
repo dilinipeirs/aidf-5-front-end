@@ -28,11 +28,11 @@ export default function AccountDetails() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
-              <Input id="firstName" defaultValue={user?.firstName || ""} />
+              <Input disabled id="firstName" defaultValue={user?.firstName || ""} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastName">Last Name</Label>
-              <Input id="lastName" defaultValue={user?.lastName || ""} />
+              <Input disabled id="lastName" defaultValue={user?.lastName || ""} />
             </div>
           </div>
           <div className="space-y-2">
@@ -64,12 +64,12 @@ export default function AccountDetails() {
             </Label>
             <Input id="address" defaultValue="123 Main Street, New York, NY 10001" />
           </div> */}
-          <Button
+          {/* <Button
            onClick={() =>
             window.alert(
               "This feature is not implemented yet. To edit your account details, please call our customer support at 1-800-555-1234."
             )
-          }>Save Changes</Button>
+          }>Save Changes</Button> */}
         </CardContent>
       </Card>
 
